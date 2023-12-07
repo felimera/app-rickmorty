@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface AnimatedCharacterService {
     List<AnimatedCharacter> getAll();
+
+    AnimatedCharacter postAnimatedCharacter(AnimatedCharacter animatedCharacter);
 }
