@@ -1,5 +1,6 @@
 drop table if exists characters;
 drop table if exists called_tables;
+drop table if exists system_errors;
 
 create table characters (
     ch_id int auto_increment primary key,
@@ -25,3 +26,5 @@ create table called_tables (
 
 
 alter table called_tables add foreign key (ct_error_id) references system_errors(se_id);
+
+insert into characters (ch_name,ch_picture,ch_gender,ch_state) values ('name_test','picture_test','M','V');
