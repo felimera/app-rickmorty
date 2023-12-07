@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
 
@@ -19,7 +20,6 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
 
     @Override
     public List<AnimatedCharacter> getAll() {
-        List<AnimatedCharacter>animatedCharacters= animatedCharacterRepository.findAll();
-        return animatedCharacters;
+        return animatedCharacterRepository.findAll();
     }
 }
