@@ -1,9 +1,9 @@
 package com.coderbyte.apprickmorty.repository;
 
-import com.coderbyte.apprickmorty.model.Character;
+import com.coderbyte.apprickmorty.model.AnimatedCharacter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<Integer, Character> {
+public interface AnimatedCharacterRepository extends JpaRepository<AnimatedCharacter, Integer> {
 }
