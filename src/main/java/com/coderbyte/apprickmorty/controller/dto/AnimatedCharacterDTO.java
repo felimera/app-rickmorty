@@ -8,8 +8,8 @@ import lombok.Setter;
 public class AnimatedCharacterDTO {
 
     private Integer id;
-    private String nombre;
-    private String imagen;
-    private String genero;
-    private String estado;
+    private String name;
+    private String image;
+    private String gender;
+    private String status;
 }

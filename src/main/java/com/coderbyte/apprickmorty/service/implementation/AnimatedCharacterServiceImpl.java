@@ -8,7 +8,6 @@ import com.coderbyte.apprickmorty.repository.AnimatedCharacterRepository;
 import com.coderbyte.apprickmorty.service.AnimatedCharacterService;
 import com.coderbyte.apprickmorty.service.CalledTablesService;
 import com.coderbyte.apprickmorty.utils.CadenaUtil;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -34,17 +33,18 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
         return animatedCharacterRepository.findAll();
     }
 
-    @Transactional
     @Override
     public AnimatedCharacter postAnimatedCharacter(AnimatedCharacter animatedCharacter) {
 
         Optional<AnimatedCharacter> animatedCharacterOptional = animatedCharacterRepository.findByName(animatedCharacter.getName().toUpperCase());
         if (animatedCharacterOptional.isPresent()) {
-            String code = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            String code = "404-1";
+            String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
             String message = "The record could not be saved.";
-            calledTablesService.postCalledTablesWithError(addCalledTables(animatedCharacter), addSystemError(code, message));
 
-            throw new BusinessException("404-1", HttpStatus.INTERNAL_SERVER_ERROR, message);
+            calledTablesService.postCalledTablesWithError(addCalledTables(animatedCharacter), addSystemError(code, status, message));
+
+            throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
         }
         AnimatedCharacter entity = animatedCharacterRepository.save(animatedCharacter);
         calledTablesService.postCalledTables(addCalledTables(entity));
@@ -59,9 +59,10 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
         return tables;
     }
 
-    private SystemError addSystemError(String code, String message) {
+    private SystemError addSystemError(String code, String status, String message) {
         SystemError systemError = new SystemError();
         systemError.setCode(code);
+        systemError.setStatus(status);
         systemError.setMessage(message);
         return systemError;
     }

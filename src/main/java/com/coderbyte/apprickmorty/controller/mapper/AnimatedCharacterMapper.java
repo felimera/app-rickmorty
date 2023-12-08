@@ -9,12 +9,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface AnimatedCharacterMapper {
+
     AnimatedCharacterMapper INSTANCE = Mappers.getMapper(AnimatedCharacterMapper.class);
 
-    @Mapping(source = "name", target = "nombre")
-    @Mapping(target = "imagen", source = "picture")
-    @Mapping(target = "genero", source = "gender")
-    @Mapping(target = "estado", source = "state")
+    @Mapping(target = "image", source = "picture")
+    @Mapping(target = "status", source = "state")
     AnimatedCharacterDTO toDto(AnimatedCharacter entity);
 
     @InheritInverseConfiguration
