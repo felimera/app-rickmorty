@@ -4,12 +4,11 @@ import com.coderbyte.apprickmorty.controller.dto.parameter.PageableSearchDTO;
 import com.coderbyte.apprickmorty.exception.BusinessException;
 import com.coderbyte.apprickmorty.exception.NotFoundException;
 import com.coderbyte.apprickmorty.model.AnimatedCharacter;
-import com.coderbyte.apprickmorty.model.CalledTables;
-import com.coderbyte.apprickmorty.model.SystemError;
+import com.coderbyte.apprickmorty.model.TypeRequest;
 import com.coderbyte.apprickmorty.repository.AnimatedCharacterRepository;
 import com.coderbyte.apprickmorty.service.AnimatedCharacterService;
 import com.coderbyte.apprickmorty.service.CalledTablesService;
-import com.coderbyte.apprickmorty.utils.CadenaUtil;
+import com.coderbyte.apprickmorty.service.SystemErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,13 +24,15 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
 
     private AnimatedCharacterRepository animatedCharacterRepository;
     private CalledTablesService calledTablesService;
+    private SystemErrorService systemErrorService;
 
     private static final String ORDER = "order";
 
     @Autowired
-    public AnimatedCharacterServiceImpl(AnimatedCharacterRepository animatedCharacterRepository, CalledTablesService calledTablesService) {
+    public AnimatedCharacterServiceImpl(AnimatedCharacterRepository animatedCharacterRepository, CalledTablesService calledTablesService, SystemErrorService systemErrorService) {
         this.animatedCharacterRepository = animatedCharacterRepository;
         this.calledTablesService = calledTablesService;
+        this.systemErrorService = systemErrorService;
     }
 
     @Override
@@ -44,11 +44,11 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
                 String status = HttpStatus.NOT_FOUND.name();
                 String message = "No records found.";
 
-                calledTablesService.postCalledTablesWithError(addCalledTables(ORDER, order, "GET"), addSystemError(code, status, message));
+                calledTablesService.postCalledTablesWithError(calledTablesService.addCalledTables(ORDER, order, TypeRequest.GET.name()), systemErrorService.addSystemError(code, status, message));
 
                 throw new NotFoundException(message, code, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            calledTablesService.postCalledTables(addCalledTables(ORDER, order, "GET"));
+            calledTablesService.postCalledTables(calledTablesService.addCalledTables(ORDER, order, TypeRequest.GET.name()));
 
             return animatedCharacterList;
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
             String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
             String message = "Error in the query." + e.getMessage();
 
-            calledTablesService.postCalledTablesWithError(addCalledTables(ORDER, order, "GET"), addSystemError(code, status, message));
+            calledTablesService.postCalledTablesWithError(calledTablesService.addCalledTables(ORDER, order, TypeRequest.GET.name()), systemErrorService.addSystemError(code, status, message));
 
             throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
         }
@@ -71,12 +71,12 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
             String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
             String message = "The record could not be saved.";
 
-            calledTablesService.postCalledTablesWithError(addCalledTables("animatedCharacter", animatedCharacter, "POST"), addSystemError(code, status, message));
+            calledTablesService.postCalledTablesWithError(calledTablesService.addCalledTables(AnimatedCharacter.class.toString(), animatedCharacter, TypeRequest.POST.name()), systemErrorService.addSystemError(code, status, message));
 
             throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
         }
         AnimatedCharacter entity = animatedCharacterRepository.save(animatedCharacter);
-        calledTablesService.postCalledTables(addCalledTables("animatedCharacter", entity, "POST"));
+        calledTablesService.postCalledTables(calledTablesService.addCalledTables(AnimatedCharacter.class.toString(), entity, TypeRequest.POST.name()));
         return entity;
     }
 
@@ -85,23 +85,8 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
         Sort orders = this.getWayToOrganizeData(dto.getOrder());
         Pageable pageable = PageRequest.of(dto.getInitPage(), dto.getSizePage(), orders);
 
+        calledTablesService.postCalledTables(calledTablesService.addCalledTables(PageableSearchDTO.class.toString(), dto, TypeRequest.GET.name()));
         return animatedCharacterRepository.findAll(pageable);
-    }
-
-    private CalledTables addCalledTables(String parameter, Object data, String typeRequest) {
-        CalledTables tables = new CalledTables();
-        tables.setRegistrationDate(LocalDate.now());
-        tables.setTypeRequest(typeRequest);
-        tables.setLoginInformation(CadenaUtil.convertBodyToJson(parameter, data));
-        return tables;
-    }
-
-    private SystemError addSystemError(String code, String status, String message) {
-        SystemError systemError = new SystemError();
-        systemError.setCode(code);
-        systemError.setStatus(status);
-        systemError.setMessage(message);
-        return systemError;
     }
 
     private Sort getWayToOrganizeData(int order) {
