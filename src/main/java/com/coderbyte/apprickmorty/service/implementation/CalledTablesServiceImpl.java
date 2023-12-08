@@ -5,8 +5,11 @@ import com.coderbyte.apprickmorty.model.SystemError;
 import com.coderbyte.apprickmorty.repository.CalledTablesRepository;
 import com.coderbyte.apprickmorty.service.CalledTablesService;
 import com.coderbyte.apprickmorty.service.SystemErrorService;
+import com.coderbyte.apprickmorty.utils.CadenaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class CalledTablesServiceImpl implements CalledTablesService {
@@ -30,5 +33,14 @@ public class CalledTablesServiceImpl implements CalledTablesService {
         SystemError error = systemErrorService.postSystemError(systemError);
         calledTables.setSystemError(error);
         return calledTablesRepository.save(calledTables);
+    }
+
+    @Override
+    public CalledTables addCalledTables(String parameter, Object data, String typeRequest) {
+        CalledTables tables = new CalledTables();
+        tables.setRegistrationDate(LocalDate.now());
+        tables.setTypeRequest(typeRequest);
+        tables.setLoginInformation(CadenaUtil.convertBodyToJson(parameter, data));
+        return tables;
     }
 }

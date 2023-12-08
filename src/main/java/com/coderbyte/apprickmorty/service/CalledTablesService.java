@@ -9,4 +9,6 @@ public interface CalledTablesService {
     CalledTables postCalledTables(CalledTables calledTables);
 
     CalledTables postCalledTablesWithError(CalledTables calledTables, SystemError systemError);
+
+    CalledTables addCalledTables(String parameter, Object data, String typeRequest);
 }

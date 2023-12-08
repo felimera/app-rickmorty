@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface SystemErrorService {
     SystemError postSystemError(SystemError systemError);
+
+    SystemError addSystemError(String code, String status, String message);
 }

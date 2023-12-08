@@ -20,4 +20,13 @@ public class SystemErrorServiceImpl implements SystemErrorService {
     public SystemError postSystemError(SystemError systemError) {
         return systemErrorRepository.save(systemError);
     }
+
+    @Override
+    public SystemError addSystemError(String code, String status, String message) {
+        SystemError systemError = new SystemError();
+        systemError.setCode(code);
+        systemError.setStatus(status);
+        systemError.setMessage(message);
+        return systemError;
+    }
 }
