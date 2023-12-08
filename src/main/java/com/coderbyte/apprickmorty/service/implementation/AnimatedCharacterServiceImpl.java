@@ -1,6 +1,7 @@
 package com.coderbyte.apprickmorty.service.implementation;
 
 import com.coderbyte.apprickmorty.exception.BusinessException;
+import com.coderbyte.apprickmorty.exception.NotFoundException;
 import com.coderbyte.apprickmorty.model.AnimatedCharacter;
 import com.coderbyte.apprickmorty.model.CalledTables;
 import com.coderbyte.apprickmorty.model.SystemError;
@@ -22,6 +23,8 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
     private AnimatedCharacterRepository animatedCharacterRepository;
     private CalledTablesService calledTablesService;
 
+    private static final  String ORDER = "order";
+
     @Autowired
     public AnimatedCharacterServiceImpl(AnimatedCharacterRepository animatedCharacterRepository, CalledTablesService calledTablesService) {
         this.animatedCharacterRepository = animatedCharacterRepository;
@@ -30,7 +33,29 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
 
     @Override
     public List<AnimatedCharacter> getAll(int order) {
-        return animatedCharacterRepository.findAll(this.getWayToOrganizeData(order));
+        try {
+            List<AnimatedCharacter> animatedCharacterList = animatedCharacterRepository.findAll(this.getWayToOrganizeData(order));
+            if (animatedCharacterList.isEmpty()) {
+                String code = "404-1";
+                String status = HttpStatus.NOT_FOUND.name();
+                String message = "No records found.";
+
+                calledTablesService.postCalledTablesWithError(addCalledTables(ORDER, order, "GET"), addSystemError(code, status, message));
+
+                throw new NotFoundException(message, code, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            calledTablesService.postCalledTables(addCalledTables(ORDER, order, "GET"));
+
+            return animatedCharacterList;
+        } catch (Exception e) {
+            String code = "501-1";
+            String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
+            String message = "Error in the query." + e.getMessage();
+
+            calledTablesService.postCalledTablesWithError(addCalledTables(ORDER, order, "GET"), addSystemError(code, status, message));
+
+            throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
+        }
     }
 
     @Override
@@ -42,20 +67,20 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
             String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
             String message = "The record could not be saved.";
 
-            calledTablesService.postCalledTablesWithError(addCalledTables(animatedCharacter), addSystemError(code, status, message));
+            calledTablesService.postCalledTablesWithError(addCalledTables("animatedCharacter", animatedCharacter, "POST"), addSystemError(code, status, message));
 
             throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
         }
         AnimatedCharacter entity = animatedCharacterRepository.save(animatedCharacter);
-        calledTablesService.postCalledTables(addCalledTables(entity));
+        calledTablesService.postCalledTables(addCalledTables("animatedCharacter", entity, "POST"));
         return entity;
     }
 
-    private CalledTables addCalledTables(AnimatedCharacter entity) {
+    private CalledTables addCalledTables(String parameter, Object data, String typeRequest) {
         CalledTables tables = new CalledTables();
         tables.setRegistrationDate(LocalDate.now());
-        tables.setTypeRequest("POST");
-        tables.setLoginInformation(CadenaUtil.convertBodyToJson("animatedCharacters", entity));
+        tables.setTypeRequest(typeRequest);
+        tables.setLoginInformation(CadenaUtil.convertBodyToJson(parameter, data));
         return tables;
     }
 
