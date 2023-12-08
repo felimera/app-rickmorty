@@ -16,6 +16,8 @@ public class SystemError {
     private Integer id;
     @Column(name = "se_code")
     private String code;
+    @Column(name = "se_status")
+    private String status;
     @Column(name = "se_message")
     private String  message;
 }
