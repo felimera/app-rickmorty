@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface AnimatedCharacterService {
-    List<AnimatedCharacter> getAll();
+    List<AnimatedCharacter> getAll(int order);
 
     AnimatedCharacter postAnimatedCharacter(AnimatedCharacter animatedCharacter);
 }

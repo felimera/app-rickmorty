@@ -23,8 +23,8 @@ public class AnimatedCharacterController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<Object> getAll() {
-        List<AnimatedCharacterDTO> animatedCharacterDTOList = animatedCharacterService.getAll().stream().map(AnimatedCharacterMapper.INSTANCE::toDto).toList();
+    public ResponseEntity<Object> getAll(@RequestParam(name = "order", defaultValue = "0") String order) {
+        List<AnimatedCharacterDTO> animatedCharacterDTOList = animatedCharacterService.getAll(Integer.parseInt(order)).stream().map(AnimatedCharacterMapper.INSTANCE::toDto).toList();
         return ResponseEntity.ok(animatedCharacterDTOList);
     }
 

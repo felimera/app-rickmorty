@@ -9,12 +9,12 @@ import com.coderbyte.apprickmorty.service.AnimatedCharacterService;
 import com.coderbyte.apprickmorty.service.CalledTablesService;
 import com.coderbyte.apprickmorty.utils.CadenaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
@@ -29,15 +29,15 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
     }
 
     @Override
-    public List<AnimatedCharacter> getAll() {
-        return animatedCharacterRepository.findAll();
+    public List<AnimatedCharacter> getAll(int order) {
+        return animatedCharacterRepository.findAll(this.getWayToOrganizeData(order));
     }
 
     @Override
     public AnimatedCharacter postAnimatedCharacter(AnimatedCharacter animatedCharacter) {
 
-        Optional<AnimatedCharacter> animatedCharacterOptional = animatedCharacterRepository.findByName(animatedCharacter.getName().toUpperCase());
-        if (animatedCharacterOptional.isPresent()) {
+        Boolean isExistAnimeted = animatedCharacterRepository.isExistByName(animatedCharacter.getName().toUpperCase());
+        if (Boolean.TRUE.equals(isExistAnimeted)) {
             String code = "404-1";
             String status = HttpStatus.INTERNAL_SERVER_ERROR.name();
             String message = "The record could not be saved.";
@@ -65,5 +65,27 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
         systemError.setStatus(status);
         systemError.setMessage(message);
         return systemError;
+    }
+
+    private Sort getWayToOrganizeData(int order) {
+        String data;
+        switch (order) {
+            case 1:
+                data = "name";
+                break;
+            case 2:
+                data = "picture";
+                break;
+            case 3:
+                data = "gender";
+                break;
+            case 4:
+                data = "state";
+                break;
+            default:
+                data = "id";
+                break;
+        }
+        return Sort.by(Sort.Direction.ASC, data);
     }
 }
