@@ -1,11 +1,15 @@
 package com.coderbyte.apprickmorty.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "system_errors")
 public class SystemError {
@@ -19,5 +23,5 @@ public class SystemError {
     @Column(name = "se_status")
     private String status;
     @Column(name = "se_message")
-    private String  message;
+    private String message;
 }
