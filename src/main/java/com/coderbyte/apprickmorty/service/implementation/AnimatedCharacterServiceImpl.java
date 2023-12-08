@@ -1,5 +1,6 @@
 package com.coderbyte.apprickmorty.service.implementation;
 
+import com.coderbyte.apprickmorty.controller.dto.parameter.PageableSearchDTO;
 import com.coderbyte.apprickmorty.exception.BusinessException;
 import com.coderbyte.apprickmorty.exception.NotFoundException;
 import com.coderbyte.apprickmorty.model.AnimatedCharacter;
@@ -10,6 +11,9 @@ import com.coderbyte.apprickmorty.service.AnimatedCharacterService;
 import com.coderbyte.apprickmorty.service.CalledTablesService;
 import com.coderbyte.apprickmorty.utils.CadenaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,7 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
     private AnimatedCharacterRepository animatedCharacterRepository;
     private CalledTablesService calledTablesService;
 
-    private static final  String ORDER = "order";
+    private static final String ORDER = "order";
 
     @Autowired
     public AnimatedCharacterServiceImpl(AnimatedCharacterRepository animatedCharacterRepository, CalledTablesService calledTablesService) {
@@ -74,6 +78,14 @@ public class AnimatedCharacterServiceImpl implements AnimatedCharacterService {
         AnimatedCharacter entity = animatedCharacterRepository.save(animatedCharacter);
         calledTablesService.postCalledTables(addCalledTables("animatedCharacter", entity, "POST"));
         return entity;
+    }
+
+    @Override
+    public Page<AnimatedCharacter> findAll(PageableSearchDTO dto) {
+        Sort orders = this.getWayToOrganizeData(dto.getOrder());
+        Pageable pageable = PageRequest.of(dto.getInitPage(), dto.getSizePage(), orders);
+
+        return animatedCharacterRepository.findAll(pageable);
     }
 
     private CalledTables addCalledTables(String parameter, Object data, String typeRequest) {
