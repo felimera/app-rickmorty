@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.mapper;
 
-import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterEntity;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
