@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.controllers;
 
 import com.coderbyte.apprickmorty.application.services.AnimatedCharacterService;
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

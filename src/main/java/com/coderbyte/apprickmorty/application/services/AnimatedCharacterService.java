@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.application.services;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.in.character.CreateAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.DeleteAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.RetrieveAnimatedCharacterUseCase;

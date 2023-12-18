@@ -1,8 +1,8 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
-import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterEntity;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterEntity;
 import com.coderbyte.apprickmorty.infrastructure.mapper.AnimatedCharacterMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

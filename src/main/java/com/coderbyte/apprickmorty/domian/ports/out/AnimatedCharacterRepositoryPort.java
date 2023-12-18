@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.domian.ports.out;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 
 import java.util.List;
 import java.util.Optional;

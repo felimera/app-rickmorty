@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.application.usecases.character;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.in.character.UpdateAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterEntity;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
