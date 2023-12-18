@@ -2,6 +2,8 @@ package com.coderbyte.apprickmorty.domian.ports.out;
 
 import com.coderbyte.apprickmorty.domian.models.response.CharacterSchema;
 
+import java.util.List;
+
 public interface ExternalServicePort {
-    CharacterSchema getCharacterSchemaInfor(String name);
+    List<CharacterSchema> getCharacterSchemaInfor(String name);
 }
