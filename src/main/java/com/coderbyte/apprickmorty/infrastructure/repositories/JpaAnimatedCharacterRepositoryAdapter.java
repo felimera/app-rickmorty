@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterEntity;
 import com.coderbyte.apprickmorty.infrastructure.mapper.AnimatedCharacterMapper;
@@ -16,26 +16,26 @@ public class JpaAnimatedCharacterRepositoryAdapter implements AnimatedCharacterR
 
     private final JpaAnimatedCharacterRepository jpaAnimatedCharacterRepository;
 
-    public AnimatedCharacter save(AnimatedCharacter animatedCharacter) {
-        AnimatedCharacterEntity animatedCharacterEntity = AnimatedCharacterMapper.INSTANCE.fromDomainModel(animatedCharacter);
+    public AnimatedCharacterDTO save(AnimatedCharacterDTO animatedCharacterDTO) {
+        AnimatedCharacterEntity animatedCharacterEntity = AnimatedCharacterMapper.INSTANCE.fromDomainModel(animatedCharacterDTO);
         AnimatedCharacterEntity savedCharacterEntity = jpaAnimatedCharacterRepository.save(animatedCharacterEntity);
         return AnimatedCharacterMapper.INSTANCE.toDomainModel(savedCharacterEntity);
     }
 
     @Override
-    public Optional<AnimatedCharacter> findById(Long id) {
+    public Optional<AnimatedCharacterDTO> findById(Long id) {
         return jpaAnimatedCharacterRepository.findById(id).map(AnimatedCharacterMapper.INSTANCE::toDomainModel);
     }
 
     @Override
-    public List<AnimatedCharacter> findAll(Integer order) {
+    public List<AnimatedCharacterDTO> findAll(Integer order) {
         return jpaAnimatedCharacterRepository.findAll().stream().map(AnimatedCharacterMapper.INSTANCE::toDomainModel).toList();
     }
 
     @Override
-    public Optional<AnimatedCharacter> update(Long id, AnimatedCharacter animatedCharacter) {
+    public Optional<AnimatedCharacterDTO> update(Long id, AnimatedCharacterDTO animatedCharacterDTO) {
         if (jpaAnimatedCharacterRepository.existsById(id)) {
-            AnimatedCharacterEntity animatedCharacterEntity = AnimatedCharacterMapper.INSTANCE.fromDomainModel(animatedCharacter);
+            AnimatedCharacterEntity animatedCharacterEntity = AnimatedCharacterMapper.INSTANCE.fromDomainModel(animatedCharacterDTO);
             AnimatedCharacterEntity updateCharacterEntity = jpaAnimatedCharacterRepository.save(animatedCharacterEntity);
             return Optional.of(AnimatedCharacterMapper.INSTANCE.toDomainModel(updateCharacterEntity));
         }

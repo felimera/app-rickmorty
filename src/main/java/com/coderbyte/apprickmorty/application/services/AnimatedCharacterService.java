@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.application.services;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.in.character.CreateAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.DeleteAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.RetrieveAnimatedCharacterUseCase;
@@ -23,8 +23,8 @@ public class AnimatedCharacterService implements CreateAnimatedCharacterUseCase,
     }
 
     @Override
-    public AnimatedCharacter createAnimatedCharacter(AnimatedCharacter animatedCharacter) {
-        return createAnimatedCharacterUseCase.createAnimatedCharacter(animatedCharacter);
+    public AnimatedCharacterDTO createAnimatedCharacter(AnimatedCharacterDTO animatedCharacterDTO) {
+        return createAnimatedCharacterUseCase.createAnimatedCharacter(animatedCharacterDTO);
     }
 
     @Override
@@ -33,17 +33,17 @@ public class AnimatedCharacterService implements CreateAnimatedCharacterUseCase,
     }
 
     @Override
-    public Optional<AnimatedCharacter> getAnimatedCharacter(Long id) {
+    public Optional<AnimatedCharacterDTO> getAnimatedCharacter(Long id) {
         return retrieveAnimatedCharacterUseCase.getAnimatedCharacter(id);
     }
 
     @Override
-    public List<AnimatedCharacter> getAllAnimatedCharacters(Integer order) {
+    public List<AnimatedCharacterDTO> getAllAnimatedCharacters(Integer order) {
         return retrieveAnimatedCharacterUseCase.getAllAnimatedCharacters(order);
     }
 
     @Override
-    public Optional<AnimatedCharacter> updateAnimatedCharacter(Long id, AnimatedCharacter animatedCharacter) {
-        return updateAnimatedCharacterUseCase.updateAnimatedCharacter(id,animatedCharacter);
+    public Optional<AnimatedCharacterDTO> updateAnimatedCharacter(Long id, AnimatedCharacterDTO animatedCharacterDTO) {
+        return updateAnimatedCharacterUseCase.updateAnimatedCharacter(id, animatedCharacterDTO);
     }
 }

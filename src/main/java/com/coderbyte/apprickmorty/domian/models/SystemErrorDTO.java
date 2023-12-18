@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SystemError {
+public class SystemErrorDTO {
     private Integer id;
     private String code;
     private String status;

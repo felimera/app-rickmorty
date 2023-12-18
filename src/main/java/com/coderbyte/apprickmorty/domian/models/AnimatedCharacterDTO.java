@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimatedCharacter {
+public class AnimatedCharacterDTO {
     private Integer id;
     private String name;
     private String picture;

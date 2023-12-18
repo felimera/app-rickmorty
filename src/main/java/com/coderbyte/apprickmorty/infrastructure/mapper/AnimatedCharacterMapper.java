@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.mapper;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -11,10 +11,10 @@ public interface AnimatedCharacterMapper {
 
     AnimatedCharacterMapper INSTANCE = Mappers.getMapper(AnimatedCharacterMapper.class);
 
-    AnimatedCharacterEntity fromDomainModel(AnimatedCharacter animatedCharacter);
+    AnimatedCharacterEntity fromDomainModel(AnimatedCharacterDTO animatedCharacterDTO);
 
     @InheritInverseConfiguration
-    AnimatedCharacter toDomainModel(AnimatedCharacterEntity entity);
+    AnimatedCharacterDTO toDomainModel(AnimatedCharacterEntity entity);
 
 //    AnimatedCharacterPageDTO toPageDto(Page<AnimatedCharacter> characters);
 }

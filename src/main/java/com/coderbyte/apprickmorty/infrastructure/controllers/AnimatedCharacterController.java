@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.controllers;
 
 import com.coderbyte.apprickmorty.application.services.AnimatedCharacterService;
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +29,12 @@ public class AnimatedCharacterController {
     @GetMapping(path = "/all")
     public ResponseEntity<Object> getAll(@RequestParam(name = "order", defaultValue = "0") String order) {
 //        animatedPreconditionService.checkOrderBy(order);
-        List<AnimatedCharacter> animatedCharacterList = animatedCharacterService.getAllAnimatedCharacters(Integer.parseInt(order));
-        return ResponseEntity.ok(animatedCharacterList);
+        List<AnimatedCharacterDTO> animatedCharacterDTOList = animatedCharacterService.getAllAnimatedCharacters(Integer.parseInt(order));
+        return ResponseEntity.ok(animatedCharacterDTOList);
     }
 
     @PostMapping
-    public ResponseEntity<Object> postAnimatedCharacter(@RequestBody AnimatedCharacter character) {
+    public ResponseEntity<Object> postAnimatedCharacter(@RequestBody AnimatedCharacterDTO character) {
 //        animatedPreconditionService.checkNullBodyField(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(animatedCharacterService.createAnimatedCharacter(character));
     }

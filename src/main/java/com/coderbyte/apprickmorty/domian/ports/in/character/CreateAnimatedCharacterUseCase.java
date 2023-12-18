@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.domian.ports.in.character;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 
 public interface CreateAnimatedCharacterUseCase {
-    AnimatedCharacter createAnimatedCharacter(AnimatedCharacter animatedCharacter);
+    AnimatedCharacterDTO createAnimatedCharacter(AnimatedCharacterDTO animatedCharacterDTO);
 }

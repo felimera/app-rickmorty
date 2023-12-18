@@ -11,10 +11,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalledTables {
+public class CalledTablesDTO {
     private Integer id;
     private LocalDate registrationDate;
     private String typeRequest;
     private String loginInformation;
-    private SystemError systemError;
+    private SystemErrorDTO systemErrorDTO;
 }

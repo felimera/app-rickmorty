@@ -1,18 +1,18 @@
 package com.coderbyte.apprickmorty.domian.ports.out;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AnimatedCharacterRepositoryPort {
-    AnimatedCharacter save(AnimatedCharacter animatedCharacter);
+    AnimatedCharacterDTO save(AnimatedCharacterDTO animatedCharacterDTO);
 
-    Optional<AnimatedCharacter> findById(Long id);
+    Optional<AnimatedCharacterDTO> findById(Long id);
 
-    List<AnimatedCharacter> findAll(Integer order);
+    List<AnimatedCharacterDTO> findAll(Integer order);
 
-    Optional<AnimatedCharacter> update(Long id, AnimatedCharacter animatedCharacter);
+    Optional<AnimatedCharacterDTO> update(Long id, AnimatedCharacterDTO animatedCharacterDTO);
 
     boolean deleteById(Long id);
 }

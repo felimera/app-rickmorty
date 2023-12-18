@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.application.usecases.character;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.in.character.RetrieveAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
 import lombok.AllArgsConstructor;
@@ -14,12 +14,12 @@ public class RetrieveAnimatedCharacterUseCaseImpl implements RetrieveAnimatedCha
     private final AnimatedCharacterRepositoryPort animatedCharacterRepositoryPort;
 
     @Override
-    public Optional<AnimatedCharacter> getAnimatedCharacter(Long id) {
+    public Optional<AnimatedCharacterDTO> getAnimatedCharacter(Long id) {
         return animatedCharacterRepositoryPort.findById(id);
     }
 
     @Override
-    public List<AnimatedCharacter> getAllAnimatedCharacters(Integer order) {
+    public List<AnimatedCharacterDTO> getAllAnimatedCharacters(Integer order) {
         return animatedCharacterRepositoryPort.findAll(order);
     }
 }

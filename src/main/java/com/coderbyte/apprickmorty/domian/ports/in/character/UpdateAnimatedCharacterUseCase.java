@@ -1,9 +1,9 @@
 package com.coderbyte.apprickmorty.domian.ports.in.character;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacter;
+import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterDTO;
 
 import java.util.Optional;
 
 public interface UpdateAnimatedCharacterUseCase {
-    Optional<AnimatedCharacter> updateAnimatedCharacter(Long id, AnimatedCharacter animatedCharacter);
+    Optional<AnimatedCharacterDTO> updateAnimatedCharacter(Long id, AnimatedCharacterDTO animatedCharacterDTO);
 }
