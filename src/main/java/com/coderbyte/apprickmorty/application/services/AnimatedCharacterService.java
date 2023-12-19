@@ -1,10 +1,12 @@
 package com.coderbyte.apprickmorty.application.services;
 
-import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.domian.ports.in.character.CreateAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.DeleteAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.RetrieveAnimatedCharacterUseCase;
 import com.coderbyte.apprickmorty.domian.ports.in.character.UpdateAnimatedCharacterUseCase;
+import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.pages.AnimatedCharacterPageDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.parameter.PageableSearchDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +42,11 @@ public class AnimatedCharacterService implements CreateAnimatedCharacterUseCase,
     @Override
     public List<AnimatedCharacterDTO> getAllAnimatedCharacters(Integer order) {
         return retrieveAnimatedCharacterUseCase.getAllAnimatedCharacters(order);
+    }
+
+    @Override
+    public AnimatedCharacterPageDTO getDtoPage(PageableSearchDTO dto) {
+        return retrieveAnimatedCharacterUseCase.getDtoPage(dto);
     }
 
     @Override
