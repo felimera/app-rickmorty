@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.domian.models;
+package com.coderbyte.apprickmorty.domian.models.in;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

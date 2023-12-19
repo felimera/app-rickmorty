@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.domian.models.SystemErrorEntity;
+import com.coderbyte.apprickmorty.domian.models.in.SystemErrorEntity;
 import com.coderbyte.apprickmorty.domian.ports.out.SystemErrorRepositoryPort;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
 import com.coderbyte.apprickmorty.infrastructure.mapper.SystemErrorMapper;

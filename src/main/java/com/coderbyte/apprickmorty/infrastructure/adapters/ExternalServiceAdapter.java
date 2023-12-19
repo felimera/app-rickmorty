@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.adapters;
 
-import com.coderbyte.apprickmorty.domian.models.response.CharacterAllResponse;
-import com.coderbyte.apprickmorty.domian.models.response.CharacterSchema;
+import com.coderbyte.apprickmorty.domian.models.out.CharacterAllResponse;
+import com.coderbyte.apprickmorty.domian.models.out.CharacterSchema;
 import com.coderbyte.apprickmorty.domian.ports.out.ExternalServicePort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;

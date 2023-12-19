@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.domian.models.AnimatedCharacterEntity;
-import com.coderbyte.apprickmorty.domian.models.response.CharacterSchema;
+import com.coderbyte.apprickmorty.domian.models.in.AnimatedCharacterEntity;
+import com.coderbyte.apprickmorty.domian.models.out.CharacterSchema;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
 import com.coderbyte.apprickmorty.domian.ports.out.ExternalServicePort;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;

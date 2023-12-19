@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories;
 
-import com.coderbyte.apprickmorty.domian.models.CalledTablesEntity;
-import com.coderbyte.apprickmorty.domian.models.SystemErrorEntity;
+import com.coderbyte.apprickmorty.domian.models.in.CalledTablesEntity;
+import com.coderbyte.apprickmorty.domian.models.in.SystemErrorEntity;
 import com.coderbyte.apprickmorty.domian.ports.out.CalledTableRepositoryPort;
 import com.coderbyte.apprickmorty.infrastructure.entities.CalledTablesDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;

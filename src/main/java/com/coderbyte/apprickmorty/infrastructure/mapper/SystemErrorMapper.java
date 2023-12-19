@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.mapper;
 
-import com.coderbyte.apprickmorty.domian.models.SystemErrorEntity;
+import com.coderbyte.apprickmorty.domian.models.in.SystemErrorEntity;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

@@ -1,6 +1,6 @@
 package com.coderbyte.apprickmorty.infrastructure.mapper;
 
-import com.coderbyte.apprickmorty.domian.models.CalledTablesEntity;
+import com.coderbyte.apprickmorty.domian.models.in.CalledTablesEntity;
 import com.coderbyte.apprickmorty.infrastructure.entities.CalledTablesDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.domian.models.response;
+package com.coderbyte.apprickmorty.domian.models.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
