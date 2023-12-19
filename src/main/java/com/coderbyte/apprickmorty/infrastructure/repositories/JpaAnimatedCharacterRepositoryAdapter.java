@@ -5,9 +5,11 @@ import com.coderbyte.apprickmorty.domian.models.out.CharacterSchema;
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPort;
 import com.coderbyte.apprickmorty.domian.ports.out.ExternalServicePort;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.TypeRequest;
 import com.coderbyte.apprickmorty.infrastructure.exception.BusinessException;
 import com.coderbyte.apprickmorty.infrastructure.exception.NotFoundException;
 import com.coderbyte.apprickmorty.infrastructure.mapper.AnimatedCharacterMapper;
+import com.coderbyte.apprickmorty.infrastructure.util.Constantes;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -22,16 +24,22 @@ public class JpaAnimatedCharacterRepositoryAdapter implements AnimatedCharacterR
 
     private final JpaAnimatedCharacterRepository jpaAnimatedCharacterRepository;
     private final ExternalServicePort externalServicePort;
+    private final JpaCalledTablesRepositoryAdapter jpaCalledTablesRepositoryAdapter;
+    private final JpaSystemErrorRepositoryAdapter jpaSystemErrorRepositoryAdapter;
 
     public AnimatedCharacterDTO save(AnimatedCharacterDTO animatedCharacterDTO) {
         List<CharacterSchema> characterSchemaList = externalServicePort.getCharacterSchemaInfor(animatedCharacterDTO.getName());
         if (characterSchemaList.isEmpty()) {
             AnimatedCharacterEntity animatedCharacterEntity = AnimatedCharacterMapper.INSTANCE.fromDomainModel(animatedCharacterDTO);
             AnimatedCharacterEntity savedCharacterEntity = jpaAnimatedCharacterRepository.save(animatedCharacterEntity);
-            return AnimatedCharacterMapper.INSTANCE.toDomainModel(savedCharacterEntity);
+            AnimatedCharacterDTO savedCharacterDTO = AnimatedCharacterMapper.INSTANCE.toDomainModel(savedCharacterEntity);
+            jpaCalledTablesRepositoryAdapter.save(jpaCalledTablesRepositoryAdapter.addCalledTables(AnimatedCharacterDTO.class.toString(), savedCharacterDTO, TypeRequest.POST.name()));
+            return savedCharacterDTO;
         } else {
             String code = "404-1";
             String message = "The record could not be saved.";
+
+            jpaCalledTablesRepositoryAdapter.saveWithError(jpaCalledTablesRepositoryAdapter.addCalledTables(AnimatedCharacterEntity.class.toString(), animatedCharacterDTO, TypeRequest.POST.name()), jpaSystemErrorRepositoryAdapter.addSystemError(code, HttpStatus.NOT_FOUND.name(), message));
             throw new BusinessException(code, HttpStatus.INTERNAL_SERVER_ERROR, message);
         }
     }
@@ -47,8 +55,11 @@ public class JpaAnimatedCharacterRepositoryAdapter implements AnimatedCharacterR
         if (characterEntityList.isEmpty()) {
             String code = "404-1";
             String message = "No records found.";
+            jpaCalledTablesRepositoryAdapter.saveWithError(jpaCalledTablesRepositoryAdapter.addCalledTables(Constantes.ORDER, order, TypeRequest.POST.name()), jpaSystemErrorRepositoryAdapter.addSystemError(code, HttpStatus.NOT_FOUND.name(), message));
             throw new NotFoundException(message, code, HttpStatus.NOT_FOUND);
         }
+
+        jpaCalledTablesRepositoryAdapter.save(jpaCalledTablesRepositoryAdapter.addCalledTables(Constantes.ORDER, order, TypeRequest.GET.name()));
         return characterEntityList.stream().map(AnimatedCharacterMapper.INSTANCE::toDomainModel).toList();
     }
 
