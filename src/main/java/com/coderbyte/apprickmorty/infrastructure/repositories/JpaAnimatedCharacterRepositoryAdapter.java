@@ -6,11 +6,16 @@ import com.coderbyte.apprickmorty.domian.ports.out.AnimatedCharacterRepositoryPo
 import com.coderbyte.apprickmorty.domian.ports.out.ExternalServicePort;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.TypeRequest;
+import com.coderbyte.apprickmorty.infrastructure.entities.pages.AnimatedCharacterPageDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.parameter.PageableSearchDTO;
 import com.coderbyte.apprickmorty.infrastructure.exception.BusinessException;
 import com.coderbyte.apprickmorty.infrastructure.exception.NotFoundException;
 import com.coderbyte.apprickmorty.infrastructure.mapper.AnimatedCharacterMapper;
 import com.coderbyte.apprickmorty.infrastructure.util.Constantes;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -79,6 +84,16 @@ public class JpaAnimatedCharacterRepositoryAdapter implements AnimatedCharacterR
             jpaAnimatedCharacterRepository.deleteById(id);
         }
         return !jpaAnimatedCharacterRepository.existsById(id);
+    }
+
+    @Override
+    public AnimatedCharacterPageDTO getDtoPage(PageableSearchDTO dto) {
+        Sort orders = this.getWayToOrganizeData(dto.getOrder());
+        Pageable pageable = PageRequest.of(dto.getInitPage(), dto.getSizePage(), orders);
+
+        jpaCalledTablesRepositoryAdapter.save(jpaCalledTablesRepositoryAdapter.addCalledTables(PageableSearchDTO.class.toString(), dto, TypeRequest.GET.name()));
+        Page<AnimatedCharacterEntity> getCharacterEntities = jpaAnimatedCharacterRepository.findAll(pageable);
+        return AnimatedCharacterMapper.INSTANCE.toPageDto(getCharacterEntities);
     }
 
     private Sort getWayToOrganizeData(int order) {

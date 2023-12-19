@@ -2,6 +2,7 @@ package com.coderbyte.apprickmorty.infrastructure.controllers;
 
 import com.coderbyte.apprickmorty.application.services.AnimatedCharacterService;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
+import com.coderbyte.apprickmorty.infrastructure.entities.parameter.PageableSearchDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,22 +40,21 @@ public class AnimatedCharacterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(animatedCharacterService.createAnimatedCharacter(character));
     }
 
-//    @GetMapping(path = "/all/pageable")
-//    public ResponseEntity<Object> findByName(
-//            @RequestParam(name = "initPage") String initPage,
-//            @RequestParam(name = "sizePage") String sizePage,
-//            @RequestParam(name = "order", defaultValue = "0") String order
-//    ) {
-////        animatedPreconditionService.checkOrderBy(order);
-////        animatedPreconditionService.checkInitPageBy(initPage);
-////        animatedPreconditionService.checkSizePageBy(sizePage);
-//
-//        PageableSearchDTO dto = new PageableSearchDTO();
-//        dto.setOrder(Integer.parseInt(order));
-//        dto.setInitPage(Integer.parseInt(initPage));
-//        dto.setSizePage(Integer.parseInt(sizePage));
-//
-//        Page<AnimatedCharacter> characterPage = animatedCharacterService.findAll(dto);
-//        return ResponseEntity.ok(AnimatedCharacterMapper.INSTANCE.toPageDto(characterPage));
-//    }
+    @GetMapping(path = "/all/pageable")
+    public ResponseEntity<Object> findByName(
+            @RequestParam(name = "initPage") String initPage,
+            @RequestParam(name = "sizePage") String sizePage,
+            @RequestParam(name = "order", defaultValue = "0") String order
+    ) {
+//        animatedPreconditionService.checkOrderBy(order);
+//        animatedPreconditionService.checkInitPageBy(initPage);
+//        animatedPreconditionService.checkSizePageBy(sizePage);
+
+        PageableSearchDTO dto = new PageableSearchDTO();
+        dto.setOrder(Integer.parseInt(order));
+        dto.setInitPage(Integer.parseInt(initPage));
+        dto.setSizePage(Integer.parseInt(sizePage));
+
+        return ResponseEntity.ok(animatedCharacterService.getDtoPage(dto));
+    }
 }
