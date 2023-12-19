@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaCalledTablesRespository extends JpaRepository<CalledTablesEntity, Long> {
+public interface JpaCalledTablesRepository extends JpaRepository<CalledTablesEntity, Long> {
 }
