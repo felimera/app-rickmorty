@@ -1,7 +1,6 @@
 package com.coderbyte.apprickmorty.application.usecases.system;
 
 import com.coderbyte.apprickmorty.domian.ports.in.system.CreateSystemErrorUseCase;
-import com.coderbyte.apprickmorty.domian.ports.out.CalledTableRepositoryPort;
 import com.coderbyte.apprickmorty.domian.ports.out.SystemErrorRepositoryPort;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
 import lombok.AllArgsConstructor;
