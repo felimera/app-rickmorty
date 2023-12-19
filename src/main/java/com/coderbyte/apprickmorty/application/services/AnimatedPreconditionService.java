@@ -5,7 +5,8 @@ import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class AnimatedPreconditionService  implements  RetrieveAnimatedPreconditionUseCase{
+public class AnimatedPreconditionService implements RetrieveAnimatedPreconditionUseCase {
+
     private final RetrieveAnimatedPreconditionUseCase retrieveAnimatedPreconditionUseCase;
 
     @Override

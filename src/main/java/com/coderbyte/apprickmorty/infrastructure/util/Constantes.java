@@ -7,4 +7,5 @@ public class Constantes {
     }
 
     public static final String ORDER = "order";
+    public static final String PARAMETER = "parameter";
 }

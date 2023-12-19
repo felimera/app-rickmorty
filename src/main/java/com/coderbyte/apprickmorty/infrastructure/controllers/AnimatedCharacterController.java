@@ -1,6 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.controllers;
 
 import com.coderbyte.apprickmorty.application.services.AnimatedCharacterService;
+import com.coderbyte.apprickmorty.application.services.AnimatedPreconditionService;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.parameter.PageableSearchDTO;
 import org.springframework.http.HttpStatus;
@@ -14,29 +15,24 @@ import java.util.List;
 public class AnimatedCharacterController {
 
     private AnimatedCharacterService animatedCharacterService;
-//    private AnimatedPreconditionService animatedPreconditionService;
+    private AnimatedPreconditionService animatedPreconditionService;
 
-//    @Autowired
-//    public AnimatedCharacterController(AnimatedCharacterService animatedCharacterService, AnimatedPreconditionService animatedPreconditionService) {
-//        this.animatedCharacterService = animatedCharacterService;
-//        this.animatedPreconditionService = animatedPreconditionService;
-//    }
-
-
-    public AnimatedCharacterController(AnimatedCharacterService animatedCharacterService) {
+    public AnimatedCharacterController(AnimatedCharacterService animatedCharacterService, AnimatedPreconditionService animatedPreconditionService) {
         this.animatedCharacterService = animatedCharacterService;
+        this.animatedPreconditionService = animatedPreconditionService;
     }
+
 
     @GetMapping(path = "/all")
     public ResponseEntity<Object> getAll(@RequestParam(name = "order", defaultValue = "0") String order) {
-//        animatedPreconditionService.checkOrderBy(order);
+        animatedPreconditionService.checkOrderBy(order);
         List<AnimatedCharacterDTO> animatedCharacterDTOList = animatedCharacterService.getAllAnimatedCharacters(Integer.parseInt(order));
         return ResponseEntity.ok(animatedCharacterDTOList);
     }
 
     @PostMapping
     public ResponseEntity<Object> postAnimatedCharacter(@RequestBody AnimatedCharacterDTO character) {
-//        animatedPreconditionService.checkNullBodyField(dto);
+        animatedPreconditionService.checkNullBodyField(character);
         return ResponseEntity.status(HttpStatus.CREATED).body(animatedCharacterService.createAnimatedCharacter(character));
     }
 
@@ -46,9 +42,9 @@ public class AnimatedCharacterController {
             @RequestParam(name = "sizePage") String sizePage,
             @RequestParam(name = "order", defaultValue = "0") String order
     ) {
-//        animatedPreconditionService.checkOrderBy(order);
-//        animatedPreconditionService.checkInitPageBy(initPage);
-//        animatedPreconditionService.checkSizePageBy(sizePage);
+        animatedPreconditionService.checkOrderBy(order);
+        animatedPreconditionService.checkInitPageBy(initPage);
+        animatedPreconditionService.checkSizePageBy(sizePage);
 
         PageableSearchDTO dto = new PageableSearchDTO();
         dto.setOrder(Integer.parseInt(order));
