@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class JpaCalledTablesRepositoryAdapter implements CalledTableRepositoryPort {
 
-    private final JpaCalledTablesRespository jpaCalledTablesRespository;
+    private final JpaCalledTablesRepository jpaCalledTablesRespository;
 
     @Override
     public CalledTablesDTO save(CalledTablesDTO calledTablesDTO) {
