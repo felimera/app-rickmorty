@@ -32,4 +32,20 @@ public class AnimatedCharacterDTOBuilder {
         AnimatedCharacterDTOBuilder builder = toAnimatedCharacterDTOBuilder();
         return new AnimatedCharacterDTO(id, builder.name, builder.picture, builder.gender, builder.state);
     }
+    public AnimatedCharacterDTO toEditName(String name) {
+        AnimatedCharacterDTOBuilder builder = toAnimatedCharacterDTOBuilder();
+        return new AnimatedCharacterDTO(builder.id, name, builder.picture, builder.gender, builder.state);
+    }
+    public AnimatedCharacterDTO toEditPicture(String picture) {
+        AnimatedCharacterDTOBuilder builder = toAnimatedCharacterDTOBuilder();
+        return new AnimatedCharacterDTO(builder.id, builder.name, picture, builder.gender, builder.state);
+    }
+    public AnimatedCharacterDTO toEditGender(String gender) {
+        AnimatedCharacterDTOBuilder builder = toAnimatedCharacterDTOBuilder();
+        return new AnimatedCharacterDTO(builder.id, builder.name, builder.picture, gender, builder.state);
+    }
+    public AnimatedCharacterDTO toEditState(String state) {
+        AnimatedCharacterDTOBuilder builder = toAnimatedCharacterDTOBuilder();
+        return new AnimatedCharacterDTO(builder.id, builder.name, builder.picture, builder.gender, state);
+    }
 }
