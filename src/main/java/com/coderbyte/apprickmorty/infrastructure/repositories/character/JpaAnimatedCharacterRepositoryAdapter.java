@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.infrastructure.repositories;
+package com.coderbyte.apprickmorty.infrastructure.repositories.character;
 
 import com.coderbyte.apprickmorty.domian.models.in.AnimatedCharacterEntity;
 import com.coderbyte.apprickmorty.domian.models.out.CharacterSchema;
@@ -12,6 +12,8 @@ import com.coderbyte.apprickmorty.infrastructure.entities.parameter.PageableSear
 import com.coderbyte.apprickmorty.infrastructure.exception.BusinessException;
 import com.coderbyte.apprickmorty.infrastructure.exception.NotFoundException;
 import com.coderbyte.apprickmorty.infrastructure.mapper.AnimatedCharacterMapper;
+import com.coderbyte.apprickmorty.infrastructure.repositories.called.JpaCalledTablesRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.system.JpaSystemErrorRepositoryAdapter;
 import com.coderbyte.apprickmorty.infrastructure.util.Constantes;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

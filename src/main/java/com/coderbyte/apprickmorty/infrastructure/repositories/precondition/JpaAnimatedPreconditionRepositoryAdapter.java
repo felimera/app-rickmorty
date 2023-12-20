@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.infrastructure.repositories;
+package com.coderbyte.apprickmorty.infrastructure.repositories.precondition;
 
 import com.coderbyte.apprickmorty.domian.ports.out.AnimatedPreconditionRepositoryPort;
 import com.coderbyte.apprickmorty.infrastructure.entities.AnimatedCharacterDTO;
@@ -6,6 +6,8 @@ import com.coderbyte.apprickmorty.infrastructure.entities.CalledTablesDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.TypeRequest;
 import com.coderbyte.apprickmorty.infrastructure.exception.BusinessException;
+import com.coderbyte.apprickmorty.infrastructure.repositories.called.JpaCalledTablesRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.system.JpaSystemErrorRepositoryAdapter;
 import com.coderbyte.apprickmorty.infrastructure.util.Constantes;
 import com.coderbyte.apprickmorty.infrastructure.util.NumberUtil;
 import lombok.AllArgsConstructor;

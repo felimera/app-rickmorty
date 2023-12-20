@@ -13,10 +13,10 @@ import com.coderbyte.apprickmorty.application.usecases.precondition.RetrieveAnim
 import com.coderbyte.apprickmorty.application.usecases.system.CreateSystemErrorUserCaseImpl;
 import com.coderbyte.apprickmorty.domian.ports.out.*;
 import com.coderbyte.apprickmorty.infrastructure.adapters.ExternalServiceAdapter;
-import com.coderbyte.apprickmorty.infrastructure.repositories.JpaAnimatedCharacterRepositoryAdapter;
-import com.coderbyte.apprickmorty.infrastructure.repositories.JpaAnimatedPreconditionRepositoryAdapter;
-import com.coderbyte.apprickmorty.infrastructure.repositories.JpaCalledTablesRepositoryAdapter;
-import com.coderbyte.apprickmorty.infrastructure.repositories.JpaSystemErrorRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.character.JpaAnimatedCharacterRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.precondition.JpaAnimatedPreconditionRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.called.JpaCalledTablesRepositoryAdapter;
+import com.coderbyte.apprickmorty.infrastructure.repositories.system.JpaSystemErrorRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

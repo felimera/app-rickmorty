@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.infrastructure.repositories;
+package com.coderbyte.apprickmorty.infrastructure.repositories.called;
 
 import com.coderbyte.apprickmorty.domian.models.in.CalledTablesEntity;
 import com.coderbyte.apprickmorty.domian.models.in.SystemErrorEntity;
