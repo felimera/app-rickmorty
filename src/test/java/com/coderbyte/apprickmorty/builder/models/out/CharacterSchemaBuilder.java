@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.builder.models;
+package com.coderbyte.apprickmorty.builder.models.out;
 
 import com.coderbyte.apprickmorty.domian.models.out.CharacterSchema;
 import com.coderbyte.apprickmorty.domian.models.out.Ubication;

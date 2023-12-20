@@ -1,7 +1,7 @@
 package com.coderbyte.apprickmorty.infrastructure.repositories.system;
 
 import com.coderbyte.apprickmorty.builder.entities.SystemErrorDTOBuilder;
-import com.coderbyte.apprickmorty.builder.models.SystemErrorEntityBuilder;
+import com.coderbyte.apprickmorty.builder.models.in.SystemErrorEntityBuilder;
 import com.coderbyte.apprickmorty.domian.models.in.SystemErrorEntity;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
 import org.junit.jupiter.api.BeforeEach;

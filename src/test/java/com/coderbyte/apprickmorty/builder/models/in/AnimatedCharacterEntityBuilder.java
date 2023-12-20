@@ -1,4 +1,4 @@
-package com.coderbyte.apprickmorty.builder.models;
+package com.coderbyte.apprickmorty.builder.models.in;
 
 import com.coderbyte.apprickmorty.domian.models.in.AnimatedCharacterEntity;
 import lombok.Builder;

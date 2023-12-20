@@ -2,7 +2,7 @@ package com.coderbyte.apprickmorty.infrastructure.repositories.called;
 
 import com.coderbyte.apprickmorty.builder.entities.CalledTablesDTOBuilder;
 import com.coderbyte.apprickmorty.builder.entities.SystemErrorDTOBuilder;
-import com.coderbyte.apprickmorty.builder.models.CalledTablesEntityBuilder;
+import com.coderbyte.apprickmorty.builder.models.in.CalledTablesEntityBuilder;
 import com.coderbyte.apprickmorty.domian.models.in.CalledTablesEntity;
 import com.coderbyte.apprickmorty.infrastructure.entities.CalledTablesDTO;
 import com.coderbyte.apprickmorty.infrastructure.entities.SystemErrorDTO;
